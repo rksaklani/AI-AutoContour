@@ -1,0 +1,7 @@
+# Keep pydantic v1 (required by VILA submodule). Do not install pydantic>=2 here.
+fastapi==0.99.1
+uvicorn[standard]>=0.29
+pydicom>=2.4
+numpy>=1.26
+Pillow>=10.0
+python-dotenv>=1.0

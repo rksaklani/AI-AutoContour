@@ -1,0 +1,44 @@
+# GPU override for VILA-M3 full inference.
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+#
+# Prerequisites:
+#   - NVIDIA driver + nvidia-container-toolkit (see scripts/install-nvidia-container-toolkit.sh)
+#   - ~24 GB+ VRAM recommended (8B VILA + experts)
+#   - Accept CC BY-NC-SA 4.0 license on MONAI model weights (research / non-commercial)
+
+services:
+  vila-m3:
+    build:
+      context: .
+      dockerfile: infra/vila-m3-gpu.Dockerfile
+    environment:
+      VILA_M3_MODE: vila
+      VILA_M3_SOURCE: local
+      VILA_M3_MODEL_PATH: /data/checkpoints/Llama3-VILA-M3-8B
+      VILA_M3_MODEL_ID: ${VILA_M3_MODEL_ID:-MONAI/Llama3-VILA-M3-8B}
+      VILA_M3_CONV_MODE: llama_3
+      NVIDIA_VISIBLE_DEVICES: all
+    volumes:
+      - ./data/checkpoints:/data/checkpoints
+      - vila-hf-cache:/data/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  api:
+    environment:
+      AI_ENGINE: vila_m3
+      VILA_M3_URL: http://vila-m3:8100
+
+  worker:
+    environment:
+      AI_ENGINE: vila_m3
+      VILA_M3_URL: http://vila-m3:8100
+
+volumes:
+  vila-hf-cache:

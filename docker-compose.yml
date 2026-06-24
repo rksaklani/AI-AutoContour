@@ -1,0 +1,160 @@
+name: lumira
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-lumira}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-lumira}
+      POSTGRES_DB: ${POSTGRES_DB:-lumira}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-lumira}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    # Host port 6380 to avoid clashing with a host-local redis on 6379.
+    # Containers still reach redis via the internal network on 6379.
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-lumira}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-lumira-secret}
+    volumes:
+      - miniodata:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # One-shot: create the bucket on startup.
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 ${MINIO_ROOT_USER:-lumira} ${MINIO_ROOT_PASSWORD:-lumira-secret} &&
+      mc mb --ignore-existing local/${S3_BUCKET:-lumira} &&
+      echo 'Bucket ready';
+      "
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/backend.Dockerfile
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_HOST: redis
+      S3_ENDPOINT: http://minio:9000
+      VILA_M3_URL: http://vila-m3:8100
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      vila-m3:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  worker:
+    build:
+      context: .
+      dockerfile: infra/backend.Dockerfile
+    command: celery -A app.workers.celery_app worker -l info
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_HOST: redis
+      S3_ENDPOINT: http://minio:9000
+      VILA_M3_URL: http://vila-m3:8100
+    depends_on:
+      api:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      vila-m3:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: infra/frontend.Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
+        VITE_WS_BASE_URL: ${VITE_WS_BASE_URL:-ws://localhost:8000}
+    depends_on:
+      - api
+    ports:
+      - "5173:5173"
+
+  flower:
+    image: mher/flower:2.0
+    command: celery --broker=redis://redis:6379/0 flower --port=5555
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "5555:5555"
+
+  adminer:
+    image: adminer:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  # MONAI VILA-M3 sidecar (lite mode by default; GPU image + VILA_M3_MODE=vila for full VLM).
+  vila-m3:
+    build:
+      context: .
+      dockerfile: infra/vila-m3.Dockerfile
+    environment:
+      VILA_M3_MODE: ${VILA_M3_MODE:-lite}
+      VILA_M3_MODEL_PATH: ${VILA_M3_MODEL_PATH:-}
+      VILA_M3_SOURCE: ${VILA_M3_SOURCE:-local}
+    volumes:
+      - ./data/checkpoints:/data/checkpoints
+    ports:
+      - "8100:8100"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+volumes:
+  pgdata:
+  miniodata:

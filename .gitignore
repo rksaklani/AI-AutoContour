@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.sqlite3
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+*.local
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Data / artifacts
+data/
+uploads/
+*.dcm
+!frontend/public/**/*.dcm
+
+# Sample DICOM datasets (patient imaging — not source)
+LtBreast/
+
+# Docker volumes (if mounted locally)
+.minio-data/
+.pg-data/
