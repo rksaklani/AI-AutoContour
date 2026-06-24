@@ -248,7 +248,7 @@ def run_pipeline_sync(job_id: str | uuid.UUID) -> dict:
         db.close()
 
 
-@celery_app.task(name="lumira.run_pipeline", bind=True, max_retries=0)
+@celery_app.task(name="ai_autocontour.run_pipeline", bind=True, max_retries=0)
 def run_pipeline(self, job_id: str) -> dict:  # noqa: ANN001
     return run_pipeline_sync(job_id)
 

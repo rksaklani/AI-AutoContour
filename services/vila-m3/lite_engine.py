@@ -1,7 +1,7 @@
 """Lite medical AI engine (no GPU).
 
 API-compatible with VILA-M3 outputs. Used when the full VILA checkpoint and CUDA stack
-are not available. Logic mirrors Lumira's stub engine for consistent demos.
+are not available. Logic mirrors AI-AutoContour's stub engine for consistent demos.
 """
 
 from __future__ import annotations

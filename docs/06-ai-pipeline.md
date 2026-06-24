@@ -55,7 +55,7 @@ class AIEngine(Protocol):
 
 ## VILA-M3 integration (MONAI)
 
-Lumira ships a **VILA-M3 sidecar** (`services/vila-m3/`) and a `VilaM3Engine` adapter.
+AI-AutoContour ships a **VILA-M3 sidecar** (`services/vila-m3/`) and a `VilaM3Engine` adapter.
 
 | Component | Role |
 |-----------|------|

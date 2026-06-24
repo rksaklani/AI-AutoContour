@@ -1,6 +1,6 @@
 import { useViewerStore } from "@/store/viewerStore";
 
-const PREFIX = "lumira-session:";
+const PREFIX = "ai-autocontour-session:";
 
 export function loadViewerSession(studyId: string) {
   try {

@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore", case_sensitive=False)
 
     # Branding
-    LUMIRA_APP_NAME: str = "Lumira"
+    APP_NAME: str = "AI-AutoContour"
 
     # Core
     ENVIRONMENT: str = "development"
@@ -29,9 +29,9 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: str = "http://localhost:5173"
 
     # PostgreSQL
-    POSTGRES_USER: str = "lumira"
-    POSTGRES_PASSWORD: str = "lumira"
-    POSTGRES_DB: str = "lumira"
+    POSTGRES_USER: str = "ai_autocontour"
+    POSTGRES_PASSWORD: str = "ai_autocontour"
+    POSTGRES_DB: str = "ai_autocontour"
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
 
@@ -43,14 +43,14 @@ class Settings(BaseSettings):
     # S3 / MinIO
     S3_ENDPOINT: str = "http://localhost:9000"
     S3_PUBLIC_ENDPOINT: str = "http://localhost:9000"
-    S3_ACCESS_KEY: str = "lumira"
-    S3_SECRET_KEY: str = "lumira-secret"
-    S3_BUCKET: str = "lumira"
+    S3_ACCESS_KEY: str = "ai-autocontour"
+    S3_SECRET_KEY: str = "ai-autocontour-secret"
+    S3_BUCKET: str = "ai-autocontour"
     S3_REGION: str = "us-east-1"
     S3_SECURE: bool = False
 
     # Seed admin
-    FIRST_ADMIN_EMAIL: str = "admin@lumira.dev"
+    FIRST_ADMIN_EMAIL: str = "admin@ai-autocontour.dev"
     FIRST_ADMIN_PASSWORD: str = "admin12345"
 
     # AI engine: stub | vila_m3

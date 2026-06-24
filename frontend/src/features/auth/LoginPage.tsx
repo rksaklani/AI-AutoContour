@@ -12,7 +12,7 @@ export function LoginPage() {
   const setUser = useAuthStore((s) => s.setUser);
 
   const [mode, setMode] = useState<"login" | "register">("login");
-  const [email, setEmail] = useState("admin@lumira.dev");
+  const [email, setEmail] = useState("admin@ai-autocontour.dev");
   const [password, setPassword] = useState("admin12345");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -107,7 +107,7 @@ export function LoginPage() {
           </button>
 
           <p className="text-center text-[11px] text-slate-500">
-            Demo: admin@lumira.dev / admin12345
+            Demo: admin@ai-autocontour.dev / admin12345
           </p>
         </form>
       </div>

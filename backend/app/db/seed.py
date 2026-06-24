@@ -43,7 +43,7 @@ def seed_admin(db: Session, roles: dict[str, Role]) -> None:
     admin = User(
         email=settings.FIRST_ADMIN_EMAIL,
         hashed_password=hash_password(settings.FIRST_ADMIN_PASSWORD),
-        full_name="Lumira Admin",
+        full_name="AI-AutoContour Admin",
         is_active=True,
         role_id=roles["admin"].id,
     )

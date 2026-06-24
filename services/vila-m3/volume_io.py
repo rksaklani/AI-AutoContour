@@ -1,4 +1,4 @@
-"""Fetch a representative 2D slice from Lumira study instance URLs for VILA-M3."""
+"""Fetch a representative 2D slice from AI-AutoContour study instance URLs for VILA-M3."""
 
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def prepare_study_image(
     modality = (mid.get("modality") or "CT").upper()
     url = mid["url"]
 
-    root = work_dir or tempfile.mkdtemp(prefix="lumira-vila-")
+    root = work_dir or tempfile.mkdtemp(prefix="ai-autocontour-vila-")
     Path(root).mkdir(parents=True, exist_ok=True)
 
     try:

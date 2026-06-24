@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build backend image
-        run: docker build -f infra/backend.Dockerfile -t lumira-backend:ci .
+        run: docker build -f infra/backend.Dockerfile -t ai-autocontour-backend:ci .
 
       - name: Build frontend image
-        run: docker build -f infra/frontend.Dockerfile -t lumira-frontend:ci .
+        run: docker build -f infra/frontend.Dockerfile -t ai-autocontour-frontend:ci .

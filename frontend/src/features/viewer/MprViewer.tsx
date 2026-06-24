@@ -768,7 +768,7 @@ function downloadCanvases(canvases: HTMLCanvasElement[]) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `lumira-screenshot-${Date.now()}.png`;
+    a.download = `ai-autocontour-screenshot-${Date.now()}.png`;
     a.click();
     URL.revokeObjectURL(url);
   }, "image/png");

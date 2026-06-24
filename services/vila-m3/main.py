@@ -1,4 +1,4 @@
-"""VILA-M3 GPU sidecar for Lumira.
+"""VILA-M3 GPU sidecar for AI-AutoContour.
 
 Exposes analyze / ask / report endpoints. Runs in lite mode by default (no GPU).
 Set VILA_M3_MODE=vila and mount MONAI checkpoints for full inference.
@@ -21,7 +21,7 @@ from schemas import (
 
 import runtime
 
-app = FastAPI(title="Lumira VILA-M3 Sidecar", version="0.1.0")
+app = FastAPI(title="AI-AutoContour VILA-M3 Sidecar", version="0.1.0")
 
 
 @app.on_event("startup")

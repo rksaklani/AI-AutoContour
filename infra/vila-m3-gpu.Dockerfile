@@ -1,4 +1,4 @@
-# Lumira VILA-M3 GPU image — MONAI VLM-Radiology-Agent-Framework + Lumira sidecar.
+# AI-AutoContour VILA-M3 GPU image — MONAI VLM-Radiology-Agent-Framework + AI-AutoContour sidecar.
 # Base: official PyTorch CUDA image (avoids NCCL symbol mismatch on bare cuda:devel).
 
 FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel

@@ -2,8 +2,8 @@ import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 
 import { API_BASE_URL, API_PREFIX } from "./config";
 
-const TOKEN_KEY = "lumira.access_token";
-const REFRESH_KEY = "lumira.refresh_token";
+const TOKEN_KEY = "ai-autocontour.access_token";
+const REFRESH_KEY = "ai-autocontour.refresh_token";
 
 export const tokenStore = {
   getAccess: () => localStorage.getItem(TOKEN_KEY),

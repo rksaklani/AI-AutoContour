@@ -98,7 +98,7 @@ def segmentations_from_expert(
     *,
     z_mm: float = 0.0,
 ) -> list[dict]:
-    """Parse expert output into Lumira-style segmentation dicts with contours."""
+    """Parse expert output into AI-AutoContour-style segmentation dicts with contours."""
     labels = parse_expert_labels(expert_text)
     if not labels and overlay_paths:
         labels = [("#38bdf8", "Expert segmentation")]

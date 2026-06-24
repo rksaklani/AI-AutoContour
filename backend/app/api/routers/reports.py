@@ -130,6 +130,6 @@ def download_report(
         content=data,
         media_type=_CONTENT_TYPES[format],
         headers={
-            "Content-Disposition": f'attachment; filename="lumira-report-{report_id}.{format}"'
+            "Content-Disposition": f'attachment; filename="ai-autocontour-report-{report_id}.{format}"'
         },
     )

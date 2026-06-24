@@ -1,6 +1,6 @@
-# Lumira Documentation
+# AI-AutoContour Documentation
 
-This folder contains the 13 deliverables for the Lumira platform.
+This folder contains the 13 deliverables for the AI-AutoContour platform.
 
 1. [Architecture & folder structure](01-architecture.md)
 2. [Frontend architecture](02-frontend.md)

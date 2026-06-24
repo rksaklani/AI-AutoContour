@@ -1,4 +1,4 @@
-"""Bridge VILA-M3 free-text + expert outputs into Lumira analyze API schema."""
+"""Bridge VILA-M3 free-text + expert outputs into AI-AutoContour analyze API schema."""
 
 from __future__ import annotations
 

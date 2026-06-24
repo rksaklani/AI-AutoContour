@@ -1,6 +1,6 @@
 # 1. Architecture & Folder Structure
 
-Lumira is a service-oriented monorepo. Each concern (web SPA, API, async worker, AI
+AI-AutoContour is a service-oriented monorepo. Each concern (web SPA, API, async worker, AI
 engine) is independently deployable but shares contracts through typed schemas.
 
 ## High-level architecture
@@ -50,7 +50,7 @@ graph TD
 ## Folder structure
 
 ```
-lumira/
+ai-autocontour/
 ├── README.md
 ├── .env.example
 ├── docker-compose.yml

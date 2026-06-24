@@ -1,3 +1,3 @@
-"""Lumira backend application package."""
+"""AI-AutoContour backend application package."""
 
 __version__ = "0.1.0"

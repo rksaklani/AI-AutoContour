@@ -50,7 +50,7 @@ def _series_instances_for_study(study: Study) -> list[dict]:
 
 def _context(study: Study) -> dict:
     ctx = {
-        "app_name": settings.LUMIRA_APP_NAME,
+        "app_name": settings.APP_NAME,
         "engine_name": get_engine().name,
         "generated_at": datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC"),
         "study": study,
@@ -113,7 +113,7 @@ def render_docx(study: Study) -> bytes | None:
         return None
 
     doc = Document()
-    doc.add_heading(f"{settings.LUMIRA_APP_NAME} — AI-Assisted Imaging Report", level=0)
+    doc.add_heading(f"{settings.APP_NAME} — AI-Assisted Imaging Report", level=0)
 
     doc.add_heading("Patient Information", level=1)
     doc.add_paragraph(f"Name: {study.patient_name or '—'}")

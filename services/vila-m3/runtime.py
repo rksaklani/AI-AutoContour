@@ -102,7 +102,7 @@ def health() -> dict:
 def _study_image(req: StudyAnalyzeRequest) -> tuple[str | None, str, float]:
     from volume_io import assemble_nifti_from_series, prepare_study_image
 
-    work = tempfile.mkdtemp(prefix="lumira-study-")
+    work = tempfile.mkdtemp(prefix="ai-autocontour-study-")
     nifti = assemble_nifti_from_series(req.series_instances, work)
     if nifti:
         logger.info("Assembled NIfTI volume for experts: %s", nifti)

@@ -1,6 +1,6 @@
-# Lumira — AI-Powered Medical Imaging Platform
+# AI-AutoContour — AI-Powered Medical Imaging Platform
 
-Lumira is an enterprise-grade, AI-assisted diagnostic medical imaging platform. It goes
+AI-AutoContour is an enterprise-grade, AI-assisted diagnostic medical imaging platform. It goes
 beyond a traditional DICOM viewer: users upload medical imaging studies (CT, MRI, PET,
 X-Ray, Ultrasound), the platform validates and stores them, runs an AI pipeline to detect
 abnormalities and segment structures, auto-annotates findings, and generates structured
@@ -60,13 +60,13 @@ Then open:
 
 | Service | URL | Notes |
 |---------|-----|-------|
-| Web app | http://localhost:5173 | Lumira UI |
+| Web app | http://localhost:5173 | AI-AutoContour UI |
 | API docs | http://localhost:8000/docs | FastAPI / OpenAPI |
 | MinIO console | http://localhost:9001 | user/pass from `.env` |
 | Flower (Celery) | http://localhost:5555 | task monitoring |
 | Adminer (DB) | http://localhost:8080 | Postgres UI |
 
-Default seeded login: `admin@lumira.dev` / `admin12345` (see `backend/app/db/seed.py`).
+Default seeded login: `admin@ai-autocontour.dev` / `admin12345` (see `backend/app/db/seed.py`).
 
 ### Try the flow
 1. Log in.
@@ -119,5 +119,5 @@ docker-compose.yml
 
 ## License
 
-Proprietary — internal scaffold. Not for clinical use. Lumira is not a medical device and
+Proprietary — internal scaffold. Not for clinical use. AI-AutoContour is not a medical device and
 its AI output (currently stubbed) must not be used for diagnosis.

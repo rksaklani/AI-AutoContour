@@ -3,4 +3,4 @@ export const API_BASE_URL =
 export const WS_BASE_URL =
   (import.meta.env.VITE_WS_BASE_URL as string) || "ws://localhost:8000";
 export const API_PREFIX = "/api/v1";
-export const APP_NAME = "Lumira";
+export const APP_NAME = "AI-AutoContour";

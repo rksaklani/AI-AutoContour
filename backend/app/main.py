@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):  # noqa: ARG001
-    logger.info("%s API starting (env=%s)", settings.LUMIRA_APP_NAME, settings.ENVIRONMENT)
+    logger.info("%s API starting (env=%s)", settings.APP_NAME, settings.ENVIRONMENT)
     try:
         from app.services import storage
 
@@ -24,11 +24,11 @@ async def lifespan(app: FastAPI):  # noqa: ARG001
     except Exception as exc:  # noqa: BLE001
         logger.warning("Could not ensure bucket on startup: %s", exc)
     yield
-    logger.info("%s API shutting down", settings.LUMIRA_APP_NAME)
+    logger.info("%s API shutting down", settings.APP_NAME)
 
 
 app = FastAPI(
-    title=f"{settings.LUMIRA_APP_NAME} API",
+    title=f"{settings.APP_NAME} API",
     version="0.1.0",
     description="AI-powered medical imaging platform API.",
     lifespan=lifespan,
@@ -59,7 +59,7 @@ app.include_router(ws.router, prefix=prefix)
 @app.get("/")
 def root() -> dict:
     return {
-        "name": settings.LUMIRA_APP_NAME,
+        "name": settings.APP_NAME,
         "docs": "/docs",
         "version": "0.1.0",
     }

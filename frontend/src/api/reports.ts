@@ -33,7 +33,7 @@ export async function downloadReport(reportId: string, format: "pdf" | "docx" | 
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `lumira-report-${reportId}.${format}`;
+  a.download = `ai-autocontour-report-${reportId}.${format}`;
   document.body.appendChild(a);
   a.click();
   a.remove();

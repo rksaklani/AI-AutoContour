@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Lumira — start the full stack (frontend, backend API, Celery worker, VILA-M3 model, infra).
+# AI-AutoContour — start the full stack (frontend, backend API, Celery worker, VILA-M3 model, infra).
 #
 # Usage:
 #   ./run.sh              Start everything (auto GPU if available)
@@ -26,9 +26,9 @@ FOREGROUND=0
 NO_BUILD=0
 DOWNLOAD_MODEL=0
 
-log() { printf '\033[1;34m[lumira]\033[0m %s\n' "$*"; }
-warn() { printf '\033[1;33m[lumira]\033[0m %s\n' "$*" >&2; }
-err() { printf '\033[1;31m[lumira]\033[0m %s\n' "$*" >&2; }
+log() { printf '\033[1;34m[ai-autocontour]\033[0m %s\n' "$*"; }
+warn() { printf '\033[1;33m[ai-autocontour]\033[0m %s\n' "$*" >&2; }
+err() { printf '\033[1;31m[ai-autocontour]\033[0m %s\n' "$*" >&2; }
 
 usage() {
   sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//'
@@ -116,7 +116,7 @@ maybe_download_checkpoint() {
 print_urls() {
   cat <<'EOF'
 
-  Lumira is running:
+  AI-AutoContour is running:
 
     Web app (frontend)  http://localhost:5173
     API (backend)       http://localhost:8000/docs
@@ -125,7 +125,7 @@ print_urls() {
     Flower (Celery)     http://localhost:5555
     Adminer (database)  http://localhost:8080
 
-  Login: admin@lumira.dev / admin12345
+  Login: admin@ai-autocontour.dev / admin12345
 
 EOF
 }
